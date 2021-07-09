@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/mixa1/Desktop/practice/FunctionsForPractice.h
+
+C:/Users/mixa1/Desktop/practice/Matrix.h
+
+C:/Users/mixa1/Desktop/practice/main.cpp
+iostream
+-
+stdio.h
+-
+Matrix.h
+C:/Users/mixa1/Desktop/practice/Matrix.h
+FunctionsForPractice.h
+C:/Users/mixa1/Desktop/practice/FunctionsForPractice.h
+
