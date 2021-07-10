@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.19)
-project(practice)
+project(pr1)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 14)
 
-add_executable(practice main.cpp Matrix.h FunctionsForPractice.h)
+add_executable(pr1 main.cpp FunctionsForPractice.h CRS.h)
