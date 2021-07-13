@@ -30,6 +30,7 @@ public:
 
     CRS(int** &matrix, int &rang_m) {
         rang = rang_m;
+        length = 0;
         for (int i = 0; i < rang; i++) {
             for (int j = 0; j < rang; j++) {
                 if (matrix[i][j] != 0) {
@@ -39,7 +40,7 @@ public:
         }
         values = new int[length];
         columns = new int[length];
-        rowindex = new int[length + 1];
+        rowindex = new int[rang+ 1];
         rowindex[0] = 0;
         int count = 0;
         int count_lines = 0;

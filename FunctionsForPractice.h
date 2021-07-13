@@ -36,6 +36,7 @@ int** digraph_input(int &edges) {
             //cout << "Please enter the path" << endl;
             //cin >> path;
             path = "/home/mikhail/Рабочий стол/pr1/input.txt";
+            cout << path << endl;
             fin.open(path);
             if (!fin.is_open()) {
                 cout << "File open error!";

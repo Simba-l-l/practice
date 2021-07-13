@@ -8,7 +8,11 @@ int main() {
     int number;
     while (true) {
         system("clear");
-        cout << "Please choose number of task" << endl;
+        cout << "Please choose number of task"
+                "\n1.Digraph input"
+                "\n2.Output of adjacency matrix in CRS format"
+                "\n3.Matrix addition in CRS format"
+                "\n~.or any other character to exit" << endl;
         cin >> number;
         switch (number) {
             case 1: {
