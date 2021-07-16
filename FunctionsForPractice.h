@@ -5,8 +5,6 @@
 #ifndef PR1_FUNCTIONSFORPRACTICE_H
 #define PR1_FUNCTIONSFORPRACTICE_H
 #pragma once
-
-//#include "iostream"
 #include "string"
 #include "fstream"
 
@@ -36,7 +34,6 @@ int** digraph_input(int &edges) {
             //cout << "Please enter the path" << endl;
             //cin >> path;
             path = "/home/mikhail/Рабочий стол/pr1/input.txt";
-            cout << path << endl;
             fin.open(path);
             if (!fin.is_open()) {
                 cout << "File open error!";
@@ -90,6 +87,7 @@ void resize_helper (int** &arr, int &size, int &resize){
     size = size + resize;
     arr = helper;
 }
+
 int comp1 (const void * a, const void * b)
 {
     return ( *(int*)a - *(int*)b );
@@ -133,13 +131,6 @@ int** addition_helper(int** &arr1, int** &arr2, int &size1, int &size2){
         temp[1][i + size1] = arr2[1][i];
     }
     size1 = size1 + size2;
-//    for (int i = 0; i < 2; i ++){
-//        delete [] arr1[i];
-//        delete [] arr2[i];
-//    }
-//    delete[] arr1;
-//    delete[] arr2;
-    //11
     return temp;
 }
 

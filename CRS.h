@@ -14,8 +14,7 @@ public:
     int* values;
     int* columns;
     int* rowindex;
-    int length;
-    int  rang;
+    int length, rang;
     CRS(){
         rang = 0;
         length = 0;
@@ -28,7 +27,7 @@ public:
         rang = ra;
     }
 
-    CRS(int** &matrix, int &rang_m) {
+    CRS(int** &matrix, int rang_m) {
         rang = rang_m;
         length = 0;
         for (int i = 0; i < rang; i++) {
@@ -43,7 +42,6 @@ public:
         rowindex = new int[rang+ 1];
         rowindex[0] = 0;
         int count = 0;
-        int count_lines = 0;
         for (int i = 0; i < rang; i++) {
             for (int j = 0; j < rang; j++) {
                 if (matrix[i][j] != 0) {
@@ -55,7 +53,29 @@ public:
             }
         }
     }
-    void print_CRS(){
+
+    int** get_matrix() const{
+        int** result = new int*[rang];
+        int count = 0;
+        for (int i = 0; i < rang; i ++){
+            result[i] = new int[rang];
+        }
+        for (int i = 0; i < rang; i++){
+            for (int j = 0; j < rang; j++){
+                result [i][j] = 0;
+            }
+        }
+        for (int i = 0 ; i < rang + 1; i++){
+            for (int j = count; j < rowindex[i]; j++){
+                result[i - 1][columns[j]] = values[j];
+                count++;
+            }
+        }
+        return result;
+    }
+
+
+    void print_CRS() const{
       int method;
       cout << "Chouse the output method \n1.Console output \n2.File output"<< endl;
       cin >> method;
@@ -75,6 +95,9 @@ public:
                 }
                 cout << endl;
                 break;
+                default:{
+                    cout << "Method selection error" << endl;
+                }
             }
             case 2:{
                 ofstream fout;
@@ -102,13 +125,14 @@ public:
         }
     }
 
-    CRS operator +(const CRS & other){
+
+
+    CRS operator + (const CRS & other) {
         CRS temp;
         if (this->rang != other.rang){
             cout << "Аddition error!\n" <<"the ranks of the matrices are different" << endl;
             return temp;
         }
-        bool flag;
         temp.rang = this->rang;
         temp.rowindex = new int[temp.rang + 1];
         temp.rowindex[0] = 0;
@@ -174,7 +198,7 @@ public:
             }
             final_helper_result = addition_helper(final_helper_result, helper_result, size_fhr, result_size);
             for (int j = 0; j < 2; j++){
-            delete[] helper_2[j] ;
+                delete[] helper_2[j] ;
                 delete[] helper_1[j];
             }
 
@@ -187,11 +211,44 @@ public:
     }
 
 
+    CRS operator * (const CRS & other)  {
+        if (this->rang != other.rang){
+            cout << "Multiplication error!\n" <<"the ranks of the matrices are different";
+            CRS temp;
+            return temp;
+        }
+        int** m1 = this->get_matrix();
+        int** m2 = other.get_matrix();
+        int** res = new int*[this->rang];
+        for (int i = 0; i < this->rang; i++)
+        {
+            res[i] = new int[this->rang];
+            for (int j = 0; j < this->rang; j++)
+            {
+                res[i][j] = 0;
+                for (int k = 0; k < this->rang; k++)
+                    res[i][j] += m1[i][k] * m2[k][j];
+            }
+        }
+        CRS temp(res, this->rang);
+        for (int i = 0; i < this->rang; i++){
+            delete[] m1[i];
+            delete[] m2[i];
+            delete[] res[i];
+        }
+        delete[] m1;
+        delete[] m2;
+        delete[] res;
+        return temp;
+    }
+
+
+
 
     ~CRS(){
-        delete[] values;
-        delete[] columns;
-        delete[] rowindex;
+//        delete[] values;
+//        delete[] columns;
+//        delete[] rowindex;
     }
 };
 

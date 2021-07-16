@@ -9,10 +9,10 @@ int main() {
     while (true) {
         system("clear");
         cout << "Please choose number of task"
-                "\n1.Digraph input"
-                "\n2.Output of adjacency matrix in CRS format"
-                "\n3.Matrix addition in CRS format"
-                "\n~.or any other character to exit" << endl;
+                "\n 1.Digraph input"
+                "\n 2.Output of adjacency matrix in CRS format"
+                "\n 3.Matrix addition and multiplication in CRS format"
+                "\n ~.or any other character to exit" << endl;
         cin >> number;
         switch (number) {
             case 1: {
@@ -55,7 +55,8 @@ int main() {
                 break;
             }
             case 3:{
-                int len1, len2, rang1, rang2;
+                bool flag = true;
+                int len1, len2, rang1, rang2, act;
                 cout << "Enter length of first CRS matrix " << endl;
                 cin >> len1;
                 cout << "Enter rang of first CRS matrix " << endl;
@@ -96,8 +97,29 @@ int main() {
                 }
                 CRS a (a1, a2, a3, len1, rang1);
                 CRS b (b1, b2, b3, len2, rang2);
-                CRS c = a + b;
-                c.print_CRS();
+                static CRS c;
+                while (flag) {
+                    cout << "Select an action\n"
+                            " 1.Addition CRS\n"
+                            " 2.Multiplication\n"
+                            " ~.or any other character to exit" << endl;
+                    cin >> act;
+                    switch (act) {
+                        case 1: {
+                            c = a + b;
+                            c.print_CRS();
+                            break;
+                        }
+                        case 2: {
+                            c = a * b;
+                            c.print_CRS();
+                            break;
+                        }
+                        default:
+                            flag = false;
+                            break;
+                    }
+                }
                 break;
             }
             default:
